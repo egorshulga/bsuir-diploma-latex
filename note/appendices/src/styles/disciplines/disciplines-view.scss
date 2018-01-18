@@ -1,0 +1,53 @@
+﻿// disciplines-view.scss
+@import "../colors";
+
+#disciplines-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .discipline-line {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $lighter-border-color;
+        border-radius: 1px;
+        padding: 14px 7px;
+
+        .discipline-info {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: space-between;
+
+            > span {
+                flex: 0 1 auto;
+            }
+
+            .discipline-abbreviation {
+                flex-shrink: 1;
+                width: 20%;
+            }
+
+            .discipline-tutor {
+                width: 40%;
+                text-align: left;
+            }
+
+            .discipline-type {
+                width: 7%;
+            }
+
+            .discipline-hours {
+            }
+        }
+
+        .discipline-status {
+            flex: 0 1 auto;
+        }
+
+        &:hover {
+            background-color: $light-background-hover-color;
+            cursor: pointer;
+        }
+    }
+}

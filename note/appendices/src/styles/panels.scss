@@ -1,0 +1,17 @@
+﻿// panels.scss
+.two-side-panel {
+	height: 100%;
+
+	display: flex;
+	flex-direction: row;
+
+	.left-side {
+		flex: 0 0 50%;
+		overflow-y: auto;
+	}
+
+	.right-side {
+		flex: 0 0 50%;
+		overflow-y: auto;
+	}
+}

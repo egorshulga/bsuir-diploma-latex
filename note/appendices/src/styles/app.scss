@@ -1,0 +1,32 @@
+﻿// app.scss
+@import "colors";
+
+#app {
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    #main-header {
+        flex: 0 0 50px;
+        width: 100%;
+        background-color: $dark-background-color;
+    }
+
+    #app-body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        width: 1200px;
+
+        > .menu {
+            height: 100%;
+        }
+
+        #app-content {
+            flex: 1 1 auto;
+        }
+    }
+}

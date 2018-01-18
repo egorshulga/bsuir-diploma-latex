@@ -1,0 +1,20 @@
+﻿// index.scss
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    #root {
+        margin: 0;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: medium;
+    }
+}
+
+.panel {
+    margin-bottom: 10px !important;
+
+    .panel-heading a {
+        cursor: pointer;
+    }
+}
