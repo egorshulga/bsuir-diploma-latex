@@ -1,15 +1,6 @@
-﻿# Примечание к форку
-Более хорошая структуризация разделов и подразделов.
+﻿## Примечание к форку
 
-Немного подправлена преамбула.
-
-Здесь выпилен полный пример записки, оставлены только куски, в которых есть интересные конструкции (рисунок, таблица, перечисление).
-
-*Крайне рекомендую настроить окружение из Sublime + LaTeXTools + SumatraPDF.* Будут вам и [горячие клавиши](https://latextools.readthedocs.io/en/latest/keybindings/), и предпросмотр формул и картинок, и быстрый переход из кода в pdf-ку и обратно и много всяких других фич.
-
-Для сборки документа рекомендуется выбрать LaTeX - Basic Builder - PdfLaTeX (для отображения списка сборщиков: ctrl + shift + B, находясь в каком-либо .tex файле).
-
-Будет обновлено, ~~когда~~ если диплом будет защищен.
+Диплом соответствует требованиям кафедры ПОИТ для дипломов на момент лета 2017 года.
 
 
 # Цель
@@ -18,30 +9,21 @@
 Документ в соответствии с которым настраивается оформление документа: [СТАНДАРТ ПРЕДПРИЯТИЯ. ДИПЛОМНЫЕ ПРОЕКТЫ (РАБОТЫ). ОБЩИЕ ТРЕБОВАНИЯ СТП 01—2013](http://www.bsuir.by/m/12_100229_1_80040.pdf).
 
 
-# Рекомендации
-* Рекомендуемый дистрибутив LaTeX для Windows [MiKTeX](http://miktex.org/).
-* Рекомендуемый редактор [Sublime](http://www.sublimetext.com/) вместе с [менеджером пакетов](http://wbond.net/sublime_packages/package_control) и установленным пакетом [LaTeXTools](https://github.com/SublimeText/LaTeXTools) и PDF просмотрщиком [SumatraPDF](http://blog.kowalczyk.info/software/sumatrapdf/free-pdf-reader.html).
-* Рекомендуемые справочные пособия по вопросам связанным с LaTeX: [Bing](http://bing.com/?mkt=en-us), [Google](http://google.com), [Yandex](http://ya.ru) и книги.
-* Рекомендуемая программа для ведения библиографической базы данных: [JabRef](http://jabref.sourceforge.net/)
-* Инструкция по установке русского Times New Roman из пакета pscyr находится [здесь](http://plumbum-blog.blogspot.com/2010/06/miktex-28-pscyr-04d.html)
-* Если возникли **проблемы с pscyr**, то можно переключиться на использование **scalable-cyrfonts-tex**, с которым также могут быть проблемы при установке, но их **проще решить** (см. 
-[Wiki→Возникающие-ошибки](https://github.com/mstyura/bsuir-diploma-latex/wiki/Возникающие-ошибки#scalable-cyrfonts-tex-on-ubuntu))
+## Рекомендуемое окружение
 
-## Установка
-### Linux, Ubuntu (TeX Live)
-- установить texlive-full: `sudo apt-get install texlive-full`
-- установить модифицированный [scalable-cyrfonts-tex](https://yadi.sk/d/GW2PhDgEcJH7m): `sudo dpkg -i scalable-cyrfonts-tex-shurph_4.16_all.deb`
-- можно приступать к сборке проекта
+ - [Visual Studio Code](https://code.visualstudio.com)
+ - Расширение [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+ - [TeX Live](https://www.tug.org/texlive/)
 
-### Windows (MiKTeX)
-- см. выше список рекомендаций
-- раскомментировать строку `\input{fonts_windows}` в файле `preamble.tex` (и закомментировать строку `\input{fonts_linux}`)
+### Установка
+
+Для установки TeX Live рекомендуется выбирать *simple install (big)* режим установки. Установка занимает около часа, размер установленного дистрибутива составляет около 5 ГБ, зато все требуемые пакеты будут точно установлены.
+
+При разработке на windows после установки TeX Live необходимо установить шрифты для русского языка PSCyr. Для этого нужно распаковать архив *pscyr.zip* из корня проекта в папку установленного Tex Live (по умолчанию это папка *c:\\texlive*). После этого нужно запустить скрипт *install_pscyr.bat*.
+
+### Использование
+
+При открытом *.tex* файле в VSCode в боковом меню появляется панель с командами LaTeX.
 
 
-# Примечание
-Многое, наверное, сделано некрасиво и не правильно с точки зрения LaTeX, но я пока новичок и только учусь.
-__Первоначальная компиляция проекта может занять некоторое время, т.к. должны установиться пакеты, используемые в preamble.tex__.
-Для диагностики неисправности рекомендуется посмотреть генерируемый log файл или запустить компиляцию из командной строки с помощью pdflatex.
-
-# Помощь
-Описания назначений файлов можно прочитать в [вики](https://github.com/mstyura/bsuir-diploma-latex/wiki/%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5%20%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2).
+![latex panel](https://raw.githubusercontent.com/egorshulga/new-bsuir-diploma-latex/master/note/attachments/latex-panel.png)
