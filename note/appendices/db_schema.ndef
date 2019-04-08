@@ -1,0 +1,442 @@
+﻿{ N.DatabaseConfiguration
+  ConfigurationId:
+  RedundancyLevel: 0
+  DatabaseSchema:
+  { N.DatabaseSchema
+    TypeDefinitions:
+    *
+    { N.TypeDefinition
+      TypeName: Entity
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Id: Int64
+    }
+    *
+    { N.TypeDefinition
+      TypeName: User
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Email: String
+      * EmailConfirmed: Boolean
+      * RegistrationDateTime: DateTime
+      * PasswordHash: String
+      * PasswordSalt: String
+      * HashAlgorithm: String
+      * PasswordChangeDateTime: DateTime
+      * FirstName: String
+      * MiddleName: String
+      * LastName: String
+      * About: String
+    }
+    *
+    { N.TypeDefinition
+      TypeName: StudentRoleRequest
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * State: Byte
+      * User: User
+      * StudentGroup: StudentGroup
+      * Subgroup: Byte
+    }
+    *
+    { N.TypeDefinition
+      TypeName: TutorRoleRequest
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * State: Byte
+      * User: User
+      * Department: Department
+    }
+    *
+    { N.TypeDefinition
+      TypeName: ApprovedStudentRoleRequest
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * ApprovedDateTime: DateTime
+      * StudentRoleRequest: StudentRoleRequest
+      * Approver: User
+    }
+    *
+    { N.TypeDefinition
+      TypeName: ApprovedTutorRoleRequest
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * ApprovedDateTime: DateTime
+      * TutorRoleRequest: TutorRoleRequest
+      * Approver: User
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Student
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * User: User
+      * StudentGroups: StudentGroup[]
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Tutor
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * User: User
+      * AcademicPosition: Byte
+      * AdministrativePosition: Byte
+      * AcademicDegree: Byte
+      * AcademicTitle: Byte
+      * Department: Department @BackReference(Tutors)
+      * DisciplineSections: DisciplineSection[]
+      * DisciplineMaterialSets: DisciplineMaterialSet[]
+    }
+    *
+    { N.TypeDefinition
+      TypeName: DisciplineMaterialSet
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * DisciplineSection: DisciplineSection
+      * DisciplineMaterials: DisciplineMaterial[]
+    }
+    *
+    { N.TypeDefinition
+      TypeName: University
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Abbreviation: String
+      * FullName: String
+      * Description: String
+      * Faculties: Faculty[] @BackReference(University)
+      * Departments: Department[] @BackReference(University)
+      * AdministrativeDepartments: AdministrativeDepartment[] @BackReference(University)
+      * TimeSlots: TimeSlot[]
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Faculty
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Abbreviation: String
+      * FullName: String
+      * Description: String
+      * University: University @BackReference(Faculties)
+      * Specialities: Speciality[] @BackReference(Faculty)
+    }
+    *
+    { N.TypeDefinition
+      TypeName: AdministrativeDepartment
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * Name: String
+      * Description: String
+      * University: University @BackReference(AdministrativeDepartments)
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Department
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * Abbreviation: String
+      * FullName: String
+      * Description: String
+      * University: University @BackReference(Departments)
+      * Specialities: Speciality[]
+      * Tutors: Tutor[] @BackReference(Department)
+    }
+    *
+    { N.TypeDefinition
+      TypeName: StudentGroup
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * Number: String
+      * YearOfEntrance: UInt16
+      * YearOfStudy: Byte
+      * Speciality: Speciality
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Speciality
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Abbreviation: String
+      * FullName: String
+      * WayOfStudy: Byte
+      * Faculty: Faculty
+      * SpecialityPrograms: SpecialityProgram[] @BackReference(Speciality)
+    }
+    *
+    { N.TypeDefinition
+      TypeName: SpecialityProgram
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * YearOfCommissioning: UInt16
+      * YearsToStudy: UInt16
+      * Disciplines: Discipline[]
+      * Speciality: Speciality @BackReference(SpecialityPrograms)
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Discipline
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Abbreviation: String
+      * FullName: String
+      * Description: String
+      * TotalHours: UInt16
+      * SpecialityProgram: SpecialityProgram
+      * DisciplineSections: DisciplineSection[] @BackReference(Discipline)
+    }
+    *
+    { N.TypeDefinition
+      TypeName: DisciplineSection
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * Description: String
+      * SemesterNumber: Byte
+      * SemesterHours: UInt16
+      * TypeOfExam: Byte
+      * DisciplineProgram: FileObject
+      * Discipline: Discipline @BackReference(DisciplineSections)
+      * Materials: DisciplineMaterial[]
+    }
+    *
+    { N.TypeDefinition
+      TypeName: DisciplineMaterial
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * Title: String
+      * TypeOfMaterial: Byte
+      * LastUpdateTime: DateTime
+      * FileObject: FileObject
+      * DisciplineSection: DisciplineSection
+	  * Tutor: Tutor
+    }
+    *
+    { N.TypeDefinition
+      TypeName: StudentTask
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * DisciplineMaterial: DisciplineMaterial
+      * TaskNumber: Byte
+      * VariantNumber: Byte
+      * Student: Student
+      * Tutor: Tutor
+      * TaskResults: TaskResult[] @BackReference(StudentTask)
+      * WorkflowState: Byte
+      * Mark: Byte
+      * MarkDate: DateTime
+    }
+    *
+    { N.TypeDefinition
+      TypeName: TaskResult
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * StudentTask: StudentTask @BackReference(TaskResults)
+      * DeliveryDate: DateTime
+      * FileObject: FileObject
+    }
+    *
+    { N.TypeDefinition
+      TypeName: TimeSlot
+      BaseTypeName: DbObject
+      FieldDefinitions:
+      * LessonNumber: Byte
+      * StartTime: DateTime
+      * EndTime: DateTime
+    }
+    *
+    { N.TypeDefinition
+      TypeName: ClassesSchedule
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * WeekNumber: Byte
+      * WeekDay: Byte
+      * StudentGroups: StudentGroup[]
+      * TimeSlot: TimeSlot
+      * ClassRoom: ClassRoom
+      * DisciplineSection: DisciplineSection
+      * AcademicYear: UInt16
+      * Season: Byte
+      * Tutor: Tutor
+      * TypeOfClasses: Byte
+    }
+    *
+    { N.TypeDefinition
+      TypeName: ClassesEvent
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * ClassesSchedule: ClassesSchedule
+      * Date: DateTime
+    }
+    *
+    { N.TypeDefinition
+      TypeName: StudentAttendance
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * ClassesEvent: ClassesEvent
+      * Student: Student
+      * Attendance: Byte
+    }
+    *
+    { N.TypeDefinition
+      TypeName: ClassRoom
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * University: University
+      * BuildingNumber: Byte
+      * Address: String
+      * RoomNumber: UInt16
+    }
+    *
+    { N.TypeDefinition
+      TypeName: Message
+      BaseTypeName: Entity
+      FieldDefinitions:
+      * FromUser: User
+      * ToUser: User
+      * Text: String
+      * Attachment: FileObject
+      * Time: DateTime
+    }
+    SecondaryIndexDefinitions:
+    * User[+Email]!
+    * StudentRoleRequest[+Id]!
+    * TutorRoleRequest[+Id]!
+    * ApprovedStudentRoleRequest[+Id]!
+    * ApprovedTutorRoleRequest[+Id]!
+    * Student[+Id]!
+    * Faculty[+Abbreviation]!
+    * Speciality[+Abbreviation]!
+    * University[+Abbreviation]!
+    * AdministrativeDepartment[+Id]!
+    * Department[+Id]!
+    * StudentGroup[+Id]!
+    * SpecialityProgram[+YearOfCommissioning+YearsToStudy]
+    * Discipline[+Abbreviation]!
+    * DisciplineSection[+SemesterNumber]!
+    * DisciplineMaterial[+Id]!
+    * StudentTask[+Id]!
+    * TaskResult[+Id]!
+    * TimeSlot[+LessonNumber]!
+    * ClassesSchedule[+Id]!
+    * ClassesEvent[+Id]!
+    * StudentAttendance[+Id]!
+    * ClassRoom[+Id]!
+    * Message[+Id]!
+  }
+  Nodes:
+  * 0
+  * 1
+  PrimaryIndexDistributions:
+  *
+  { N.PrimaryIndexDistribution
+    Nodes:
+    * 0
+    * 1
+  }
+  SecondaryIndexDistributions:
+  *
+  { N.SecondaryIndexDistribution
+    IndexDefinition: User[+Email]!
+    Nodes:
+    * 0
+    * 1
+    Ranges:
+    *
+    { N.SecondaryIndexDistributionRange
+      InclusiveUpperBound:
+      * p
+      MirrorNodes:
+      * 0
+    }
+    *
+    { N.SecondaryIndexDistributionRange
+      MirrorNodes:
+      * 1
+    }
+  }
+  *
+  { N.SecondaryIndexDistribution
+    IndexDefinition: University[+Abbreviation]!
+    Nodes:
+    * 0
+    * 1
+    Ranges:
+    *
+    { N.SecondaryIndexDistributionRange
+      InclusiveUpperBound:
+      * М
+      MirrorNodes:
+      * 0
+    }
+    *
+    { N.SecondaryIndexDistributionRange
+      MirrorNodes:
+      * 1
+    }
+  }
+  *
+  { N.SecondaryIndexDistribution
+    IndexDefinition: Faculty[+Abbreviation]!
+    Nodes:
+    * 0
+    * 1
+    Ranges:
+    *
+    { N.SecondaryIndexDistributionRange
+      InclusiveUpperBound:
+      * М
+      MirrorNodes:
+      * 0
+    }
+    *
+    { N.SecondaryIndexDistributionRange
+      MirrorNodes:
+      * 1
+    }
+  }
+  *
+  { N.SecondaryIndexDistribution
+    IndexDefinition: Speciality[+Abbreviation]!
+    Nodes:
+    * 0
+    * 1
+    Ranges:
+    *
+    { N.SecondaryIndexDistributionRange
+      InclusiveUpperBound:
+      * М
+      MirrorNodes:
+      * 0
+    }
+    *
+    { N.SecondaryIndexDistributionRange
+      MirrorNodes:
+      * 1
+    }
+  }
+  *
+  { N.SecondaryIndexDistribution
+    IndexDefinition: Discipline[+Abbreviation]!
+    Nodes:
+    * 0
+    * 1
+    Ranges:
+    *
+    { N.SecondaryIndexDistributionRange
+      InclusiveUpperBound:
+      * М
+      MirrorNodes:
+      * 0
+    }
+    * { N.SecondaryIndexDistributionRange
+      MirrorNodes:
+      * 1
+    }
+  }
+  FileBufferSize: 65536
+  FileStorageDistributions:
+  * { N.FileStorageDistribution
+    FileBlockSize: 4096
+    Nodes:
+    * 0
+    * 1
+  }
+}

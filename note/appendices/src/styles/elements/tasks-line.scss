@@ -1,0 +1,68 @@
+﻿// tasks-line.scss
+@import "../colors";
+
+.task-line {
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .tasks-by-type {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        margin: 0 5px 0 2px;
+
+        .tasks {
+            flex: 0 1 auto;
+            display: flex;
+            flex-wrap: wrap;
+
+            .task {
+                flex: 0 0 auto;
+                display: flex;
+                margin: 8px 4px 0 0;
+
+                .task-number {
+                    flex: 0 0 auto;
+                    width: 2.5em;
+                    text-align: right;
+                    padding: 1px 0;
+                    margin: 0 2px 0 0;
+                }
+
+                .task-mark {
+                    flex: 0 0 auto;
+                    width: 1.3em;
+                    text-align: center;
+                    border: 1px solid $light-border-color;
+
+                    &:hover {
+                        background-color: $light-background-hover-color;
+                        cursor: pointer;
+                    }
+
+                    .task-mark-set {
+                        background-color: $mark-set-background-color;
+                        padding: 0 0 0 1px;
+                        display: block;
+
+                        &:hover {
+                            background-color: $mark-set-hover-background-color;
+                        }
+                    }
+                }
+
+
+
+                .mark-selected {
+                    @extend .task-mark;
+                    background-color: $mark-selected;
+
+                    &:hover {
+                        background-color: $mark-selected-hover;
+                    }
+                }
+            }
+        }
+    }
+}

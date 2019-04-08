@@ -1,0 +1,24 @@
+﻿// subject-page.scss
+.agenda-item-page {
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+
+    .agenda-item-page-header {
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+
+        .agenda-item-page-header-subject {
+            flex: 0 1 auto;
+            font-size: larger;
+            margin: 5px;
+        }
+
+        .agenda-item-page-header-lecturer {
+            flex: 0 1 auto;
+            font-size: larger;
+            margin: 5px 5px 12px 5px;
+        }
+    }
+}

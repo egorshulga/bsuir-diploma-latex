@@ -1,0 +1,60 @@
+﻿// agenda-line.scss
+@import "../colors";
+
+.agenda-item {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $lighter-border-color;
+    border-radius: 1px;
+
+    .agenda-item-info {
+        flex: 1 1 auto;
+        display: flex;
+        padding: 14px 7px 7px 7px;
+
+        span {
+            flex: 0 0 auto;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .agenda-item-time {
+        }
+
+        .agenda-item-subject {
+            width: 20%;
+        }
+
+        .agenda-item-subject-type {
+            width: 7%;
+        }
+
+        .agenda-item-auditorium {
+            flex-shrink: 1;
+            width: 20%;
+        }
+
+        .agenda-item-lecturer {
+            flex-grow: 1;
+            text-align: end;
+        }
+    }
+
+    .agenda-item-status {
+        flex: 0 1 auto;
+        padding: 0 0 14px 0;
+    }
+
+    &:hover {
+        background-color: $light-background-hover-color;
+        cursor: pointer;
+    }
+}
+
+.agenda-line-date {
+    text-align: center;
+    padding: 5px 0;
+}

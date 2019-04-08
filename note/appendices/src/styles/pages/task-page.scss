@@ -1,0 +1,38 @@
+﻿// task-page.scss
+.task-page {
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+
+    .task-page-header {
+        display: flex;
+        flex-direction: column;
+
+        > span {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+
+            .task-page-subject {
+                flex: 0 1 auto;
+                font-size: larger;
+            }
+
+            .task-page-lecturer {
+                flex: 0 1 auto;
+                font-size: larger;
+            }
+
+            .task-page-task-type {
+                flex: 1 1 auto;
+                font-size: large;
+                margin: 0 0 7px 0;
+            }
+        }
+
+        > span:last-child {
+            margin: 5px;
+        }
+    }
+}
